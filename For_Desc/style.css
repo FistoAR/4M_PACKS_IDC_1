@@ -1,0 +1,563 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: "Prompt", sans-serif;
+}
+
+
+.home-img-container {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    background: #ffffff;
+    padding: 0.75%;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+
+/******************************************************************************** table of contents ****************************************************/
+
+.nav-toggle-btn {
+    position: fixed;
+    top: 3%;
+    left: 2%;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    border: none;
+    background: #fff;
+    /* dark green background */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 1002;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.26s, transform 0.2s, background 0.25s;
+    outline: 3px solid #fff;
+    /* white border */
+    scale: .8;
+}
+
+.nav-toggle-btn:hover {
+    background: #B2201A;
+    /* lighter green on hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+
+}
+
+.nav-toggle-btn.open {
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* --- Hamburger Icon --- */
+.hamburger-icon {
+    width: 34px;
+    height: 34px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hamburger-bar {
+    position: absolute;
+    width: 32px;
+    height: 5px;
+    border-radius: 3px;
+    background: #0e0e0d;
+    /* white bars */
+    transition: transform 0.3s cubic-bezier(.72, -0.19, .49, 1.24), opacity 0.23s;
+    left: 1px;
+}
+
+.bar1 {
+    top: 5px;
+}
+
+.bar2 {
+    top: 14px;
+}
+
+.bar3 {
+    top: 23px;
+}
+
+.nav-toggle-btn.open .bar1 {
+    transform: translateY(9px) rotate(45deg);
+    background: #080808;
+    /* green cross */
+}
+
+.nav-toggle-btn.open .bar2 {
+    opacity: 0;
+}
+
+.nav-toggle-btn.open .bar3 {
+    transform: translateY(-9px) rotate(-45deg);
+    background: #000000;
+}
+
+/* --- Floating TOC Styles --- */
+.toc-floating {
+    position: fixed;
+    top: 3.25%;
+    left: 6%;
+    min-width: 228px;
+    max-width: 96vw;
+    background: #fff;
+    /* white background */
+    padding: 23px 22px 17px 22px;
+    border-radius: 18px;
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.2);
+    border: 2px solid #000000;
+    /* dark green border */
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+    pointer-events: none;
+    transition: opacity .32s cubic-bezier(.7, -0.26, .8, 1.42), transform .33s cubic-bezier(.7, -0.26, .8, 1.42);
+    visibility: hidden;
+}
+
+.toc-floating.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.toc-title {
+    font-size: 1.2em;
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 13px;
+    letter-spacing: 0.03em;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-list li {
+    margin: 11px 0;
+    cursor: pointer;
+}
+
+.toc-list a {
+    text-decoration: none;
+    color: #000;
+    /* black text */
+    font-weight: 500;
+    display: block;
+    border-radius: 20px;
+    transition: color 0.21s, background 0.22s, transform 0.17s;
+    background: #f9f9f9;
+    /* light background */
+    padding: 10px 20px;
+    font-size: 1.03em;
+}
+
+.toc-list a:hover,
+.toc-list a:focus {
+    color: #fdfdfd;
+    background: #B2201A;
+    /* dark green hover */
+    transform: translateX(7px) scale(1.066);
+}
+
+.nav-overlay {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    /* black overlay */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .24s;
+}
+
+.nav-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (max-width: 650px) {
+    .toc-floating {
+        left: 0;
+        top: 0;
+        right: 0;
+        border-radius: 0 0 15px 15px;
+        width: 97vw;
+        margin: 0 1.5vw;
+        border-left: none;
+        border-right: none;
+    }
+
+    .nav-toggle-btn {
+        top: 16px;
+        left: 10px;
+    }
+}
+
+
+
+/* -----------nav-toc scrollable------------- */
+
+
+.toc-floating {
+    position: fixed;
+    top: 3.25%;
+    left: 6%;
+    min-width: 228px;
+    max-width: 96vw;
+    background: #fff;
+    padding: 23px 22px 17px 22px;
+    border-radius: 18px;
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.2);
+    border: 2px solid #000000;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+    pointer-events: none;
+    transition: opacity .32s cubic-bezier(.7, -0.26, .8, 1.42),
+        transform .33s cubic-bezier(.7, -0.26, .8, 1.42);
+    visibility: hidden;
+
+    /* ✅ Control the nav height */
+    max-height: 70vh;
+    /* adjust as needed */
+    display: flex;
+    flex-direction: column;
+}
+
+.toc-title {
+    flex-shrink: 0;
+    /* keep title fixed */
+}
+
+.toc-list {
+    flex: 1;
+    /* take remaining space */
+    overflow-y: auto;
+    /* only vertical scroll */
+    overflow-x: hidden;
+    /* disable horizontal scroll */
+    padding: 0;
+    margin: 0;
+}
+
+
+
+/******************************************************************************** table of contents ends ****************************************************/
+
+/******************************************************************************** share button starts ****************************************************/
+
+.share-btn {
+    position: fixed;
+    top: 3.5%;
+    right: 2%;
+    width: 58px;
+    height: 58px;
+    border: none;
+    border-radius: 50%;
+    margin: 0;
+    background: #ebf0ed;
+    /* dark green */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 1002;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s, box-shadow 0.25s;
+}
+
+.share-btn:hover {
+    background: #B2201A;
+    /* lighter green on hover */
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35);
+}
+
+.share-btn:focus {
+    outline: 2px solid #fff;
+    /* white outline */
+}
+
+.share-menu {
+    position: fixed;
+    /* top: 98px;
+    right: 36px; */
+    top: 25px;
+    right: 100px;
+    min-width: 280px;
+    padding: 14px 18px 12px 18px;
+    background: #fff;
+    /* white menu background */
+    border-radius: 13px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .2);
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    z-index: 1003;
+    /* animation: slideInDownShare .26s cubic-bezier(.7, -0.26, .8, 1.42); */
+    /* animation: slideInRightShare 0.5s cubic-bezier(.7, -0.26, .8, 1.42); */
+    animation: slideInRightShare 0.8s ease-out;
+    border: 2px solid #0f2f1d;
+    /* dark green border */
+
+}
+
+/* @keyframes slideInDownShare {
+    from {
+        opacity: .25;
+        transform: translateY(-24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+} */
+
+@keyframes slideInRightShare {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.share-menu.show {
+    display: flex;
+
+}
+
+.share-link-row {
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+#shareInput {
+    flex: 1 1 auto;
+    padding: 7px 10px;
+    font-size: 1em;
+    background: #f5f5f5;
+    /* light grey background */
+    border: 1.5px solid #0f2f1d;
+    /* dark green border */
+    border-radius: 7px;
+    color: #000;
+    /* black text */
+    font-family: inherit;
+    overflow-x: auto;
+    pointer-events: auto;
+    user-select: all;
+}
+
+.copy-link-btn {
+    background: #000000;
+    /* dark green */
+    color: #ffffff;
+    /* white text */
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 1em;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .18s, transform .18s;
+}
+
+.copy-link-btn:hover,
+.copy-link-btn:focus {
+    background: #020202;
+    /* lighter green */
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.copied-msg {
+    display: none;
+    font-size: .97em;
+    color: #000000;
+    /* dark green text */
+    margin-top: 10px;
+    letter-spacing: .02em;
+    font-weight: 600;
+    text-align: right;
+}
+
+.copied-msg.show {
+    display: inline-block;
+}
+
+@media (max-width: 700px) {
+
+    .share-btn,
+    .share-menu {
+        right: 14px;
+    }
+
+    .share-menu {
+        min-width: 160px;
+    }
+}
+
+
+/******************************************************************************** share button ends ****************************************************/
+
+
+.full-screen {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
+    background: #fdfdfd;
+    /* padding-top: 1%; */
+
+    padding: 1%;
+    padding-bottom: .75%;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+
+.full-screen i {
+    background: linear-gradient(to right, #000000, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 22px;
+    transition: all .3s ease-in-out;
+}
+
+.full-screen:hover i {
+    scale: 1.2;
+}
+
+.home-button {
+    position: fixed;
+    width: 55px;
+    height: 55px;
+    right: 2%;
+    top: 14%;
+    padding: 0.43vw;
+    z-index: 1005;
+    border-radius: 9999px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.home-button:hover {
+    background-color: #B2201A;
+}
+
+.bgm-container {
+    position: fixed;
+    top: 25%;
+    right: 30px;
+    z-index: 9999;
+}
+
+.bgm-toggle {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s;
+}
+
+.bgm-toggle:hover {
+    background: #0056b3;
+}
+
+.bgm-toggle.off {
+    background: #6c757d;
+}
+
+.bgm-toggle.off:hover {
+    background: #5a6268;
+}
+
+
+
+
+/******************************************************************************** Global  ****************************************************/
+
+.page .topsec,
+.page .bottomsec {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7%;
+}
+
+.page .midsec {
+    height: 86%;
+}
+
+.page .topsec img,
+.page .bottomsec img {
+    width: 95%;
+}
+
+/******************************************************************************** page 1  ****************************************************/
+
+
+.page.page-even .gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 101%;
+    height: 100%;
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 97.5%, rgb(0 0 0 / 44%) 100%);
+    filter: blur(6.35px);
+    background-image: linear-gradient(left, rgba(0, 0, 0, 0) 97.5%, rgb(0 0 0 / 70%) 100%);
+    z-index: 99;
+    pointer-events: none;
+    user-select: none;
+}
+/* .page.page-odd .gradient{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+ 
+    background-image:-webkit-linear-gradient(right, rgba(0,0,0,0) 95%, rgba(0,0,0,0.15) 100%);
+    background-image:linear-gradient(right, rgba(0,0,0,0) 95%, rgba(0,0,0,0.15) 100%);
+    z-index: 99;
+    pointer-events: none;
+    user-select: none;
+} */
+ 
+.page.page-odd .gradient {
+    position: absolute;
+    top: 0;
+    left: -1%;
+    width: 100%;
+    height: 100%;
+    background-image: -webkit-linear-gradient(right, rgb(0 0 0 / 0%) 97.5%, rgb(0 0 0 / 70%) 100%);
+    filter: blur(6.35px);
+    background-image: linear-gradient(right, rgb(0 0 0 / 0%) 97.5%, rgb(0 0 0 / 70%) 100%);
+    z-index: 99;
+    pointer-events: none;
+    user-select: none;
+}
+
+.hidden-controls{
+    display: none;
+}

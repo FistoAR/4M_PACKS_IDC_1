@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OODA Digital Catalogue</title>
+    <link rel="icon" href="./logo.svg">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+
+        }
+
+        @media screen and (min-width: 992px) {
+            body {
+                overflow-y: hidden;
+                overflow-x: hidden;
+            }
+
+        }
+
+
+        #content {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        #content object {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 100vh;
+            background-color: none;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #preloader video {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            user-select: none;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="preloader">
+        <video id="preloader-video" src="./ooda_pre_loader.mp4" autoplay playsinline></video>
+    </div>
+    <div id="content"></div>
+</body>
+<script>
+  const video = document.getElementById("preloader-video");
+  const preloader = document.getElementById("preloader");
+
+  let domReady = false;
+  let finalPlayStarted = false;
+  let waitToFinishOnce = false;
+
+ video.muted = true;
+video.play().catch(() => {});
+
+function enableSoundOnce() {
+  if (window.innerWidth >= 992) video.muted = false;
+  window.removeEventListener("click", enableSoundOnce);
+  window.removeEventListener("touchstart", enableSoundOnce);
+}
+
+window.addEventListener("click", enableSoundOnce);
+window.addEventListener("touchstart", enableSoundOnce);
+
+  // Wait for DOMContentLoaded
+  document.addEventListener("DOMContentLoaded", function () {
+    domReady = true;
+  });
+
+  video.addEventListener("ended", function () {
+    if (!domReady) {
+      // DOM not ready, loop video
+      video.currentTime = 0;
+      video.play();
+    }  else {
+      // Final play completed, remove preloader
+      preloader.style.transition = "opacity 0.5s ease";
+      preloader.style.opacity = 0;
+      preloader.style.pointerEvents = "none";
+      setTimeout(() => {
+        preloader.remove();
+         const obj = document.querySelector("#content object");
+        if (obj && obj.contentWindow) {
+          obj.contentWindow.postMessage({ trigger: "startAnimation" }, "*");
+        }
+      }, 600); // give time for fade-out
+    }
+  });
+</script>
+
+<script>
+  const embedded = document.getElementById("content");
+   window.addEventListener("message", function (event) {
+      // You could add origin checks here for security
+      if (event.data && event.data.action === "toggleFullscreen") {
+        if (!document.fullscreenElement) {
+          if (embedded.requestFullscreen) {
+            embedded.requestFullscreen();
+          } else if (embedded.webkitRequestFullscreen) {
+            embedded.webkitRequestFullscreen();
+          } else if (embedded.msRequestFullscreen) {
+            embedded.msRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      }
+    });
+</script>
+
+
+
+
+<script>
+    function load_home() {
+        var isMobile = window.innerWidth <= 1115;
+        var folderPath = isMobile ? 'For Mobile, Tab/index.html' : 'For Desc/index.html';
+        if (!document.getElementById("content")) {
+            console.error("Content element not found");
+            return;
+        }
+        document.getElementById("content").innerHTML =
+            '<object type="text/html" data="' + folderPath + '" style="width:100%; height:600px;"></object>';
+    }
+    window.onload = load_home;
+</script>
+
+</html>

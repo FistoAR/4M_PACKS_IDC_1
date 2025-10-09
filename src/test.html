@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Floating TOC Hamburger Reveal Nav</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #f2f2f6;
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .nav-toggle-btn {
+      position: fixed;
+      top: 36px;
+      left: 32px;
+      width: 60px;
+      height: 60px;
+      /* background: linear-gradient(135deg,#43be9f 12%, #80e4f9 68%, #4aa2e0 92%); */
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 4px 20px rgba(34,100,160,0.13);
+      z-index: 1002;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.26s, transform 0.2s;
+      outline: 2px solid #229dcd;
+    scale: .8;
+    }
+    .nav-toggle-btn.open {
+      box-shadow: 0 10px 32px rgba(30,120,200,0.18);
+      /* transform: scale(1.04); */
+    }
+    /* --- Hamburger Icon --- */
+    .hamburger-icon {
+      width: 34px;
+      height: 34px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .hamburger-bar {
+      position: absolute;
+      width: 32px;
+      height: 5px;
+      border-radius: 3px;
+      background: linear-gradient(90deg,#229dcd 60%, #43be9f 100%);
+      transition: transform 0.3s cubic-bezier(.72,-0.19,.49,1.24), opacity 0.23s;
+      left: 1px;
+    }
+    .bar1 { top: 5px; }
+    .bar2 { top: 14px; }
+    .bar3 { top: 23px; }
+    .nav-toggle-btn.open .bar1 {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .nav-toggle-btn.open .bar2 {
+      opacity: 0;
+    }
+    .nav-toggle-btn.open .bar3 {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+    /* --- Floating TOC Styles --- */
+    .toc-floating {
+      position: fixed;
+      top: 30px;
+      left: 92px;
+      min-width: 228px;
+      max-width: 96vw;
+      background: rgba(255,255,255,0.98);
+      padding: 23px 22px 17px 22px;
+      border-radius: 18px;
+      box-shadow: 0 8px 35px rgba(51,76,112,0.14);
+      border-left: 7px solid #43be9f;
+      border-right: 7px solid #4aa2e0;
+      z-index: 1001;
+      border-top: 7px solid #43be9f;
+      border-bottom: 7px solid #4aa2e0;
+      opacity: 0;
+      transform: translateY(24px) scale(0.97);
+      pointer-events: none;
+      transition: opacity .32s cubic-bezier(.7,-0.26,.8,1.42), transform .33s cubic-bezier(.7,-0.26,.8,1.42);
+      visibility: hidden;
+    }
+    .toc-floating.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      visibility: visible;
+    }
+    .toc-title {
+      font-size: 1.11em;
+      color: #239edc;
+      font-weight: 600;
+      margin-bottom: 13px;
+      letter-spacing: 0.03em;
+    }
+    .toc-list {
+      list-style: none;
+      padding: 0; margin: 0;
+    }
+    .toc-list li { margin: 11px 0; }
+    .toc-list a {
+      text-decoration: none;
+      color: #21874b;
+      font-weight: 500;
+      display: block;
+      border-radius: 20px;
+      transition:
+        color 0.21s,
+        background 0.22s,
+        transform 0.17s;
+      background: linear-gradient(to right, #60ecf4 0%, #43be9f 100%);
+      padding: 10px 20px;
+      font-size: 1.03em;
+    }
+    .toc-list a:hover, .toc-list a:focus {
+      color: #fff;
+      background: linear-gradient(to right, #229dcd 0%, #3997e8 90%);
+      transform: translateX(7px) scale(1.066);
+    }
+    .nav-overlay {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(66,106,150,0.13);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .24s;
+    }
+    .nav-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    @media (max-width: 650px) {
+      .toc-floating {
+        left: 0; top: 0; right: 0;
+        border-radius: 0 0 15px 15px;
+        width: 97vw;
+        margin: 0 1.5vw;
+        border-left: none;
+        border-right: none;
+      }
+      .nav-toggle-btn { top: 16px; left: 10px; }
+    }
+
+
+   .share-btn {
+  position: fixed;
+  top: 36px;
+  right: 36px;
+  width: 58px;
+  height: 58px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  margin: 0;
+  box-shadow: 0 4px 20px rgba(34,100,160,0.12);
+  z-index: 1002;
+  cursor: pointer;
+  display: flex;
+  align-items: center; justify-content: center;
+  transition: box-shadow 0.25s;
+}
+.share-btn:focus { outline: 2px solid #229dcd; }
+
+.share-menu {
+  position: fixed;
+  top: 98px;
+  right: 36px;
+  min-width: 280px;
+  padding: 14px 18px 12px 18px;
+  background: #fff;
+  border-radius: 13px;
+  box-shadow: 0 5px 18px rgba(60,120,190,.16);
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1003;
+  animation: slideInDownShare .26s cubic-bezier(.7,-0.26,.8,1.42);
+}
+@keyframes slideInDownShare {
+  from { opacity:.25; transform:translateY(-24px);}
+  to   { opacity:1; transform:translateY(0);}
+}
+.share-menu.show { display: flex; }
+
+.share-link-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+#shareInput {
+  flex: 1 1 auto;
+  padding: 7px 10px;
+  font-size: 1em;
+  background: #f7fdff;
+  border: 1.5px solid #60ecf4;
+  border-radius: 7px;
+  color: #239edc;
+  font-family: inherit;
+  overflow-x: auto;
+  pointer-events: auto;
+  user-select: all;
+}
+.copy-link-btn {
+  background: linear-gradient(90deg,#60ecf4 3%, #43be9f 100%);
+  color: #21874b;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 1em;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .16s, color .18s;
+}
+.copy-link-btn:hover, .copy-link-btn:focus {
+  background: linear-gradient(90deg,#229dcd 0%, #3997e8 90%);
+  color: #fff;
+}
+.copied-msg {
+  display: none;
+  font-size: .97em;
+  color: #229dcd;
+  margin-top: 10px;
+  letter-spacing: .02em;
+  font-weight: 600;
+  text-align: right;
+}
+.copied-msg.show { display: inline-block; }
+@media (max-width: 700px) {
+  .share-btn, .share-menu { right: 14px; }
+  .share-menu { min-width: 160px;}
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- Nav Toggle Button with Hamburger/Cross Icon -->
+  <button id="navToggle" class="nav-toggle-btn" aria-label="Toggle menu" aria-expanded="false">
+    <span class="hamburger-icon">
+      <span class="hamburger-bar bar1"></span>
+      <span class="hamburger-bar bar2"></span>
+      <span class="hamburger-bar bar3"></span>
+    </span>
+  </button>
+  <!-- Overlay -->
+  <div id="navOverlay" class="nav-overlay"></div>
+  <!-- Floating Table of Contents Nav -->
+  <nav id="tocNav" class="toc-floating" aria-label="Table of Contents">
+    <div class="toc-title">CONTENTS</div>
+    <ul class="toc-list">
+      <li><a href="#about-us">ABOUT US</a></li>
+      <li><a href="#growth-story">GROWTH STORY</a></li>
+      <li><a href="#services">SERVICES</a></li>
+      <li><a href="#industry-solution">INDUSTRY SOLUTION</a></li>
+      <li><a href="#applications">APPLICATIONS</a></li>
+      <li><a href="#products">PRODUCTS</a></li>
+      <li><a href="#contact-us">CONTACT US</a></li>
+    </ul>
+  </nav>
+
+  <!-- Share Button (place near end of body, after your nav, but before </body>) -->
+<!-- Share Button (top right corner) -->
+<button id="shareBtn" class="share-btn" aria-label="Share this page">
+  <!-- Replace the previous SVG in your .share-btn with this: -->
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+  <defs>
+    <linearGradient id="shareGradient2" x1="0" y1="0" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4aa2e0"/>
+      <stop offset="1" stop-color="#43be9f"/>
+    </linearGradient>
+  </defs>
+  <circle cx="15" cy="15" r="15" fill="url(#shareGradient2)" />
+  <g>
+    <circle cx="9" cy="15.5" r="2.5" fill="#fff" />
+    <circle cx="21" cy="8.5" r="2.5" fill="#fff" />
+    <circle cx="21" cy="21.5" r="2.5" fill="#fff" />
+    <path d="M11.2 14.2l7.6-4.2M11.2 16.8l7.6 4.2" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M11.2 14.2l7.6 13.1" opacity=".08"/>
+  </g>
+</svg>
+
+</button>
+<div class="share-menu" id="shareMenu" role="menu" aria-hidden="true">
+  <div class="share-link-row">
+    <input id="shareInput" type="text">
+    <button id="copyLinkBtn" class="copy-link-btn" role="menuitem">Copy Link</button>
+  </div>
+  <span class="copied-msg" id="copiedMsg">Copied!</span>
+</div>
+
+
+  <!-- Content Example -->
+  <main style="margin-left: 0;padding:60px 16px 0 16px;">
+    <section id="about-us"><h2>ABOUT US</h2><p>Your content here.</p></section>
+    <section id="growth-story"><h2>GROWTH STORY</h2><p>Your content here.</p></section>
+    <section id="services"><h2>SERVICES</h2><p>Your content here.</p></section>
+    <section id="industry-solution"><h2>INDUSTRY SOLUTION</h2><p>Your content here.</p></section>
+    <section id="applications"><h2>APPLICATIONS</h2><p>Your content here.</p></section>
+    <section id="products"><h2>PRODUCTS</h2><p>Your content here.</p></section>
+    <section id="contact-us"><h2>CONTACT US</h2><p>Your content here.</p></section>
+  </main>
+  <script>
+    // Toggle nav
+    const navToggle = document.getElementById('navToggle');
+    const tocNav = document.getElementById('tocNav');
+    const navOverlay = document.getElementById('navOverlay');
+    function openMenu() {
+      navToggle.classList.add('open');
+      tocNav.classList.add('show');
+      navOverlay.classList.add('show');
+      navToggle.setAttribute('aria-expanded','true');
+    }
+    function closeMenu() {
+      navToggle.classList.remove('open');
+      tocNav.classList.remove('show');
+      navOverlay.classList.remove('show');
+      navToggle.setAttribute('aria-expanded','false');
+    }
+    navToggle.addEventListener('click', function(){
+      if(tocNav.classList.contains('show')) closeMenu();
+      else openMenu();
+    });
+    navOverlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.toc-list a').forEach(link=>{
+      link.addEventListener('click', closeMenu);
+    });
+    // Keyboard: ESC to close
+    document.addEventListener('keydown', function(e){
+      if(e.key === "Escape") closeMenu();
+    });
+
+
+    // SHARE BUTTON LOGIC
+const shareBtn     = document.getElementById('shareBtn');
+const shareMenu    = document.getElementById('shareMenu');
+const copyLinkBtn  = document.getElementById('copyLinkBtn');
+const copiedMsg    = document.getElementById('copiedMsg');
+const shareInput   = document.getElementById('shareInput');
+
+shareInput.value = window.location.href;
+
+shareBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  const wasOpen = shareMenu.classList.contains('show');
+  document.querySelectorAll('.share-menu.show').forEach(el=>el.classList.remove('show'));
+  if (!wasOpen) {
+    shareMenu.classList.add('show');
+    shareMenu.setAttribute('aria-hidden','false');
+    shareInput.value = window.location.href;
+    setTimeout(()=>shareInput.select(), 90);
+  } else {
+    shareMenu.classList.remove('show');
+    shareMenu.setAttribute('aria-hidden','true');
+  }
+});
+copyLinkBtn.addEventListener('click', function() {
+  navigator.clipboard.writeText(shareInput.value).then(function(){
+    copiedMsg.classList.add('show');
+    setTimeout(()=>copiedMsg.classList.remove('show'), 1200);
+  });
+  shareInput.select();
+});
+
+// hide share menu on body/overlay click or Esc
+document.addEventListener('click', e=>{
+  if (!shareMenu.contains(e.target) && !shareBtn.contains(e.target))
+    shareMenu.classList.remove('show');
+});
+document.addEventListener('keydown', e=>{
+  if (e.key==="Escape") shareMenu.classList.remove('show');
+});
+
+
+  </script>
+</body>
+</html>

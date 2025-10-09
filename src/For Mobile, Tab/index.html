@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OODA BOND Digital Catalogue</title>
+  <link rel="icon" href="../logo.webp">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body style="background-color: gainsboro;">
+
+  <div class="back-top-wrapper">
+    <div class="back-top-button">
+      <i class="fa-solid fa-arrow-up"></i>
+    </div>
+  </div>
+
+  <!-------------------------------- Page 1  ------------------------------------------>
+  <div class="page"></div>
+  <div class="page"></div>
+  <div class="page"></div>
+  <div class="page"></div>
+  
+  <audio id="infoAudio" preload="auto"></audio>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
+  <script>
+    window.addEventListener("message", function (event) {
+      if (event.data && event.data.trigger === "startAnimation") {
+        const boxes = Array.from(document.querySelectorAll('.image-box'));
+        const order = [0, 1, 2, 5, 4, 3, 6, 7, 8];
+
+        order.forEach((i, index) => {
+          const box = boxes[i];
+          if (box) {
+            setTimeout(() => {
+              box.classList.add('fadeIn');
+            }, index * 500);
+          }
+        });
+      }
+    });
+
+  </script>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>

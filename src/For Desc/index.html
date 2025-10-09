@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>OODA BOND</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../logo.webp">
+
+  <!--  Turn CSS dependencies -->
+  <link type="text/css" rel="stylesheet" href="./Turn Js Assets/css/main.css">
+  <link type="text/css" rel="stylesheet" href="./Turn Js Assets/css/lightbox.css">
+  <link type="text/css" rel="stylesheet" href="./Turn Js Assets/css/cataloguemian.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./style.css">
+  <style>
+
+  </style>
+</head>
+
+<body>
+
+  <div class="catalog-app">
+    <div id="viewer">
+
+
+      <button id="navToggle" class="nav-toggle-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger-icon">
+          <span class="hamburger-bar bar1"></span>
+          <span class="hamburger-bar bar2"></span>
+          <span class="hamburger-bar bar3"></span>
+        </span>
+      </button>
+      <!-- Overlay -->
+      <div id="navOverlay" class="nav-overlay"></div>
+      <!-- Floating Table of Contents Nav -->
+      <nav id="tocNav" class="toc-floating" aria-label="Table of Contents">
+        <div class="toc-title">Table of contents</div>
+        <ul class="toc-list">
+          <li class="tb-link" data-page="1"><a> HOME</a></li>
+          <li class="tb-link" data-page="2"><a> LIST OF SERVICES</a></li>
+          <li class="tb-link" data-page="7" data-audio-path="../audios/about_us.mp3"><a> ABOUT US</a></li>
+          <li class="tb-link" data-page="8" data-audio-path="../audios/growth_story.mp3"><a> GROWTH STORY</a></li>
+          <li class="tb-link" data-page="9" data-audio-path="../audios/industry_solution.mp3"><a> INDUSTRY SOLUTION</a></li>
+          <li class="tb-link" data-page="10" data-audio-path="../audios/applications.mp3"><a> APPLICATIONS</a></li>
+          <li class="tb-link" data-page="11" data-audio-path="../audios/services.mp3"><a> SERVICES</a></li>
+          <li class="tb-link" data-page="28" data-audio-path="../audios/products.mp3"><a> PRODUCTS</a></li>
+          <li class="tb-link" data-page="40" data-audio-path="../audios/contact_us.mp3"><a> CONTACT US</a></li>
+        </ul>
+      </nav>
+
+      <button id="shareBtn" class="share-btn" aria-label="Share this page">
+        <!-- Replace the previous SVG in your .share-btn with this: -->
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <defs>
+            <linearGradient id="shareGradient2" x1="0" y1="0" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4aa2e0" />
+              <stop offset="1" stop-color="#43be9f" />
+            </linearGradient>
+          </defs>
+          <circle cx="15" cy="15" r="15" fill="url(#shareGradient2)" />
+          <g>
+            <circle cx="9" cy="15.5" r="2.5" fill="#fff" />
+            <circle cx="21" cy="8.5" r="2.5" fill="#fff" />
+            <circle cx="21" cy="21.5" r="2.5" fill="#fff" />
+            <path d="M11.2 14.2l7.6-4.2M11.2 16.8l7.6 4.2" stroke="#fff" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M11.2 14.2l7.6 13.1" opacity=".08" />
+          </g>
+        </svg>
+
+      </button>
+      <div class="share-menu" id="shareMenu" role="menu" aria-hidden="true">
+        <div class="share-link-row">
+          <input id="shareInput" type="text">
+          <button id="copyLinkBtn" class="copy-link-btn" role="menuitem">Copy Link</button>
+        </div>
+        <span class="copied-msg" id="copiedMsg">Copied!</span>
+      </div>
+
+
+      <!-- <div class="home-img-container">
+        <i class="fa-solid fa-house"></i>
+      </div> -->
+
+      <div class="full-screen">
+        <i class="fa-solid fa-expand"></i>
+      </div>
+
+      <div id="flipbook" class="ui-flipbook">
+
+        <!-------------------------------- Page 1  ------------------------------------------>
+        <div class="page"></div>
+        <div class="page"></div>
+        <div class="page"></div>
+        <div class="page"></div>
+      
+
+        <a ignore="1" class="ui-arrow-control ui-arrow-next-page"></a>
+        <a ignore="1" class="ui-arrow-control ui-arrow-previous-page"></a>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio" src="./assets/pageflip.mp3"></audio>
+
+  <audio id="infoAudio" preload="auto"></audio>
+
+  <!--  Turn Js dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <script type="text/javascript" src="Turn Js Assets/js/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="Turn Js Assets/js/underscore-min.js"></script>
+  <script type="text/javascript" src="Turn Js Assets/js/backbone-min.js"></script>
+  <script type="text/javascript" src="Turn Js Assets/js/turn.min.js"></script>
+  <script type="text/javascript" src="Turn Js Assets/js/app.js"></script>
+  <script type="text/javascript">
+    FlipbookSettings = {
+      options: {
+        width: 1100,
+        height: 690
+      },
+
+      shareMessage: 'Introducing turn.js 5 - HTML5 Library for Flipbooks.',
+
+      table: [{
+        text: 'Cover',
+        page: 1
+      },
+      {
+        text: 'About Company',
+        page: 2
+      },
+      {
+        text: 'Agriculture',
+        page: 4
+      },
+      {
+        text: 'Irrigation',
+        page: 6
+      },
+      {
+        text: 'Pumb Starters',
+        page: 12
+      },
+      {
+        text: 'Pumb Controllers',
+        page: 16
+      },
+      {
+        text: 'Domestic',
+        page: 19
+      },
+      {
+        text: 'waterpumbControllers',
+        page: 21
+      },
+      {
+        text: 'timers',
+        page: 24
+      },
+      {
+        text: 'waterlevelControllers',
+        page: 27
+      },
+      {
+        text: 'blog&Client',
+        page: 31
+      },
+      {
+        text: 'onsite&connect',
+        page: 33
+      },
+      {
+        text: 'contact',
+        page: 34
+      },
+      ],
+
+      pageFolder: 'content/catalog/'
+    };
+
+    $(window).load(function (event) {
+      $("#flipbook .page-1").addClass('animation-on');
+    });
+
+
+ 
+
+    $(".home-img-container").on("click", function () {
+      // Flip to the first page
+      $('#flipbook').turn('page', 1);
+    });
+
+    $('.full-screen').on('click', function () {
+      window.parent.postMessage({ action: "toggleFullscreen" }, "*");
+    });
+
+
+    $(document).ready(function () {
+      const flipbook = $('#flipbook');
+      const audio = document.getElementById('audio');
+
+      flipbook.bind('turning', function () {
+        if (audio) {
+          audio.currentTime = 0;
+          audio.play();
+        }
+      });
+    });
+
+    // page content animations
+    $('#flipbook').bind('turned', function (event, page, view) {
+      // resetPageImages();
+      console.log("Page turned to: " + page);
+      if (page === 2 || page === 3) {
+        // page1_2_Animation();
+        // animation
+      }
+      else{
+        // clearAnimation();
+      } 
+    });
+
+    
+
+    $('#flipbook').bind('turning', function (event, page, view) {
+      // resetPageImages();
+       // Clear or reset before the page turns
+    });
+
+
+  </script>
+ 
+
+  <script src="./script.js"></script>
+
+</body>
+
+</html>messag
