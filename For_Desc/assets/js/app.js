@@ -48,7 +48,7 @@
         },
 
         initialize: function() {
-           this.events[(Turn.isTouchDevice) ? 'doubletap' : 'tap'] = '_toggleZoomEvent';
+          //  this.events[(Turn.isTouchDevice) ? 'doubletap' : 'tap'] = '_toggleZoomEvent';
             $('body').on('tap', '.ui-arrow-next-page', $.proxy(this, '_tapNextArrowEvent'));
             $('body').on('tap', '.ui-arrow-previous-page', $.proxy(this, '_tapPreviousArrowEvent'));
 
@@ -1036,7 +1036,7 @@
     },
 
     initialize: function () {
-      this.events[(Turn.isTouchDevice) ? 'doubletap' : 'tap'] = '_toggleZoomEvent';
+      // this.events[(Turn.isTouchDevice) ? 'doubletap' : 'tap'] = '_toggleZoomEvent';
       $(window).keydown($.proxy(this, '_keydownEvent'));
       $('body').on('tap', '.ui-arrow-next-page', $.proxy(this, '_tapNextArrowEvent'));
       $('body').on('tap', '.ui-arrow-previous-page', $.proxy(this, '_tapPreviousArrowEvent'));
