@@ -9,3 +9,7 @@
    bottom: -80% !important;
    left: -88% !important;
 }
+.custom-picker-img{
+    position: absolute;
+    left: 75% !important;
+}
