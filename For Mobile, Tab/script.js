@@ -328,7 +328,7 @@ document.addEventListener('keydown', e => {
 //     });
 //   });
 // });
-const revealImages = document.querySelectorAll(".revealimage img");
+const revealImages = document.querySelectorAll(".revealimage img, .revealimage .line-reveal32");
 
 revealImages.forEach((img, index) => {
   gsap.from(img, {

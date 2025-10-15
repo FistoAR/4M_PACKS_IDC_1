@@ -561,3 +561,8 @@
 .hidden-controls{
     display: none;
 }
+
+
+.colorpick-eyedropper-input-trigger {
+    display: none;
+}
