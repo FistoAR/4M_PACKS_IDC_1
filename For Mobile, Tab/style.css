@@ -721,3 +721,57 @@ body {
     width: auto;
     z-index: 1;
 }
+
+
+
+
+
+       #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            /* display: none; */
+        }
+
+        #preloader video {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            user-select: none;
+            pointer-events: none;
+        }
+
+  /* Slow smooth logo animation */
+@keyframes logoPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+}
+
+.animate-logo {
+  animation: logoPulse 8s ease-in-out infinite; /* slower 4s cycle */
+}
+
+/* Fade-out effect */
+.fade-out {
+  opacity: 0;
+  transition: opacity 4s ease-out; /* smooth 2s fade */
+  pointer-events: none;
+}
+    

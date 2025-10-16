@@ -111,14 +111,61 @@
   .hover-effect.hovered {
     filter: brightness(0) invert(1); /* makes white effect */
   }
+
+
+
+         #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999999999;
+            opacity: 1;
+            /* display: none; */
+        }
+
+      
+
+  /* Slow smooth logo animation */
+@keyframes logoPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+}
+
+.animate-logo {
+  animation: logoPulse 8s ease-in-out infinite; /* slower 4s cycle */
+}
+
+/* Fade-out effect */
+.fade-out {
+  opacity: 0;
+  transition: opacity 4s ease-out; /* smooth 2s fade */
+  pointer-events: none;
+}
+
 </style>
 </head>
 
 <body>
 
 
-  <div id="preloader" class="fixed inset-0 bg-white flex items-center justify-center z-50">
-  <img src="../global assets/4M_Plastics_Images/4M_packs_logo.svg" alt="Logo" class="w-52 h-52 animate-logo">
+  <div id="preloader" class="fixed inset-0 bg-white flex items-center justify-center z-999999999999" style="opacity: 1;">
+  <img src="../global assets/4M_Plastics_Images/4M_packs_logo.svg" alt="Logo" class="w-52 h-52 animate-logo ">
 </div>
 
   <!-- ***************************************************** DC started *************************************************-->
