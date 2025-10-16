@@ -412,17 +412,24 @@ html, body {
 
 @media (max-width: 500px) {
   .white-page {
-    height: 70vh; /* for very small screens */
+    height: 65vh; /* for very small screens */
   }
 }
 
 @media (min-width: 501px) {
   .white-page {
-    height: 80vh; /* for screens above 500px */
+    height: 75vh; /* for screens above 500px */
+    
   }
+
 }
 
-
+@media (min-width: 600px){
+  .white-page {
+    height: 85vh; /* for screens above 500px */
+    
+  }
+}
 
 /******************************************************************************** contact page ends ****************************************************/
 

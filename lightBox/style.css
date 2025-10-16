@@ -11,7 +11,7 @@
 }
 .custom-picker-img{
     position: absolute;
-    left: 75% !important;
+    left: 82% !important;
 }
 
 
@@ -103,8 +103,8 @@
 #materialType {
     border: 2px solid #000000;
     background-color: white;
-    border-radius: 2.5vw;
-    padding: 1.5vw 2vw;
+    border-radius: 10px;
+    padding: 0.5vw 1vw;
 }
  
 #materialType:focus {
@@ -123,7 +123,10 @@
         bottom: 15%;
         left: 13%;
     }
- 
+ .custom-picker-img{
+    position: absolute;
+    left: 72% !important;
+}
     .color_picker img {
         position: relative !important;
         height: auto !important;

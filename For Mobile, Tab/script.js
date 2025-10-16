@@ -338,7 +338,7 @@ revealImages.forEach((img, index) => {
       toggleActions: "play none none reverse", 
     },
     opacity: 0,                // fade in
-    y: 60,                     // slide up slightly
+    y: 80,                     // slide up slightly
     duration: 0.5,               // normal speed (1s)
     ease: "power2.out",        // smooth easing
     delay: index * 0.015        // stagger if multiple images

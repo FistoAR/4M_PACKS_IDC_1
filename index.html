@@ -97,14 +97,14 @@
 <!-- <div id="preloader" class="fixed inset-0 bg-white flex items-center justify-center z-50">
   <img src="./images/logo.png" alt="Logo" class="w-32 h-32 animate-logo">
 </div> -->
-<div id="preloader" class="fixed inset-0 bg-white flex items-center justify-center z-50">
+<!-- <div id="preloader" class="fixed inset-0 bg-white flex items-center justify-center z-50">
   <img src="./global assets/4M_Plastics_Images/4M_packs_logo.svg" alt="Logo" class="w-52 h-52 animate-logo">
-</div>
+</div> -->
 
     <div id="content"></div>
 </body>
 
-<script>
+<!-- <script>
   document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById("preloader");
 
@@ -118,8 +118,42 @@
       }, 1000); // matches CSS transition time
     }, 3000); // extra wait before fade starts
   });
-</script>
-
+</script> -->
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const preloader = document.getElementById("preloader");
+    
+    // Select all images inside .page elements within .flipbook
+    const flipbookImages = document.querySelectorAll(".flipbook .page img");
+ 
+    let loadedImages = 0;
+ 
+    // Function to check if all images are loaded
+    function checkImagesLoaded() {
+      loadedImages++;
+      if (loadedImages === flipbookImages.length) {
+        // All images are loaded, now remove preloader
+        preloader.classList.add("fade-out");
+ 
+        // Remove preloader after fade-out
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 1000); // Matches the fade-out duration
+      }
+    }
+ 
+    // Set up event listener for each image's load event
+    flipbookImages.forEach(img => {
+      if (img.complete) {
+        // If the image is already cached, we count it as loaded
+        checkImagesLoaded();
+      } else {
+        // Otherwise, we listen for the load event
+        img.addEventListener("load", checkImagesLoaded);
+      }
+    });
+  });
+</script> -->
 
 <script>
 //   const video = document.getElementById("preloader-video");
