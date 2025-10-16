@@ -771,100 +771,454 @@
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker1").addEventListener("input", function (e) {
-    document.querySelector(".background_color1").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker1").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color1").style.backgroundColor = e.target.value;
+  // });
+
+    function initBgColor1() {
+  const picker1 = document.getElementById("bgColorPicker1");
+  const bg1= document.querySelector(".background_color1");
+
+  if (!picker1 || !bg1) return;
+
+  const updateColor1 = (color) => {
+    bg1.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker1.addEventListener("input", (e) => updateColor1(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker1.addEventListener("change", (e) => updateColor1(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker1.addEventListener("click", () => picker1.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor1, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker2").addEventListener("input", function (e) {
-    document.querySelector(".background_color2").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker2").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color2").style.backgroundColor = e.target.value;
+  // });
+
+    function initBgColor2() {
+  const picker2 = document.getElementById("bgColorPicker2");
+  const bg2= document.querySelector(".background_color2");
+
+  if (!picker2 || !bg2) return;
+
+  const updateColor2 = (color) => {
+    bg2.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker2.addEventListener("input", (e) => updateColor2(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker2.addEventListener("change", (e) => updateColor2(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker2.addEventListener("click", () => picker2.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor2, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker3").addEventListener("input", function (e) {
-    document.querySelector(".background_color3").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker3").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color3").style.backgroundColor = e.target.value;
+  // });
+
+    function initBgColor3() {
+  const picker3 = document.getElementById("bgColorPicker3");
+  const bg3 = document.querySelector(".background_color3");
+
+  if (!picker3 || !bg3) return;
+
+  const updateColor3 = (color) => {
+    bg3.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker3.addEventListener("input", (e) => updateColor3(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker3.addEventListener("change", (e) => updateColor3(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker3.addEventListener("click", () => picker3.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor3, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker4").addEventListener("input", function (e) {
-    document.querySelector(".background_color4").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker4").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color4").style.backgroundColor = e.target.value;
+  // });
+    function initBgColor4() {
+  const picker4= document.getElementById("bgColorPicker4");
+  const bg4 = document.querySelector(".background_color4");
+
+  if (!picker4 || !bg4) return;
+
+  const updateColor4 = (color) => {
+    bg4.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker4.addEventListener("input", (e) => updateColor4(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker4.addEventListener("change", (e) => updateColor4(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker4.addEventListener("click", () => picker4.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor4, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker5").addEventListener("input", function (e) {
-    document.querySelector(".background_color5").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker5").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color5").style.backgroundColor = e.target.value;
+  // });
+
+    function initBgColor5() {
+  const picker5 = document.getElementById("bgColorPicker5");
+  const bg5 = document.querySelector(".background_color5");
+
+  if (!picker5 || !bg5) return;
+
+  const updateColor5 = (color) => {
+    bg5.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker5.addEventListener("input", (e) => updateColor5(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker5.addEventListener("change", (e) => updateColor5(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker5.addEventListener("click", () => picker5.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor5, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker6").addEventListener("input", function (e) {
-    document.querySelector(".background_color6").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker6").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color6").style.backgroundColor = e.target.value;
+  // });
+
+    function initBgColor6() {
+  const picker6 = document.getElementById("bgColorPicker6");
+  const bg6 = document.querySelector(".background_color6");
+
+  if (!picker6 || !bg6) return;
+
+  const updateColor6 = (color) => {
+    bg6.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker6.addEventListener("input", (e) => updateColor6(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker6.addEventListener("change", (e) => updateColor6(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker6.addEventListener("click", () => picker6.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor6, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker7").addEventListener("input", function (e) {
-    document.querySelector(".background_color7").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker7").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color7").style.backgroundColor = e.target.value;
+  // });
+
+    function initBgColor7() {
+  const picker7 = document.getElementById("bgColorPicker7");
+  const bg7 = document.querySelector(".background_color7");
+
+  if (!picker7 || !bg7) return;
+
+  const updateColor7 = (color) => {
+    bg7.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker7.addEventListener("input", (e) => updateColor7(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker7.addEventListener("change", (e) => updateColor7(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker7.addEventListener("click", () => picker7.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor7, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker8").addEventListener("input", function (e) {
-    document.querySelector(".background_color8").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker8").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color8").style.backgroundColor = e.target.value;
+  // });
+
+    function initBgColor8() {
+  const picker8= document.getElementById("bgColorPicker8");
+  const bg8 = document.querySelector(".background_color8");
+
+  if (!picker8 || !bg8) return;
+
+  const updateColor8 = (color) => {
+    bg8.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker8.addEventListener("input", (e) => updateColor8(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker8.addEventListener("change", (e) => updateColor8(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker8.addEventListener("click", () => picker8.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor8, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker9").addEventListener("input", function (e) {
-    document.querySelector(".background_color9").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker9").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color9").style.backgroundColor = e.target.value;
+  // });
+
+  function initBgColor9() {
+  const picker9 = document.getElementById("bgColorPicker9");
+  const bg9 = document.querySelector(".background_color9");
+
+  if (!picker9 || !bg9) return;
+
+  const updateColor9 = (color) => {
+    bg9.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker9.addEventListener("input", (e) => updateColor9(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker9.addEventListener("change", (e) => updateColor9(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker9.addEventListener("click", () => picker9.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor9, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker10").addEventListener("input", function (e) {
-    document.querySelector(".background_color10").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker10").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color10").style.backgroundColor = e.target.value;
+  // });
+
+  function initBgColor10() {
+  const picker10 = document.getElementById("bgColorPicker10");
+  const bg10 = document.querySelector(".background_color10");
+
+  if (!picker10 || !bg10) return;
+
+  const updateColor10 = (color) => {
+    bg10.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker10.addEventListener("input", (e) => updateColor10(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker10.addEventListener("change", (e) => updateColor10(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker10.addEventListener("click", () => picker10.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor10, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker11").addEventListener("input", function (e) {
-    document.querySelector(".background_color11").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker11").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color11").style.backgroundColor = e.target.value;
+  // });
+
+  function initBgColor11() {
+  const picker11 = document.getElementById("bgColorPicker11");
+  const bg11 = document.querySelector(".background_color11");
+
+  if (!picker11 || !bg11) return;
+
+  const updateColor13 = (color) => {
+    bg11.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker11.addEventListener("input", (e) => updateColor11(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker11.addEventListener("change", (e) => updateColor11(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker11.addEventListener("click", () => picker11.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor11, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker12").addEventListener("input", function (e) {
-    document.querySelector(".background_color12").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker12").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color12").style.backgroundColor = e.target.value;
+  // });
+
+  function initBgColor12() {
+  const picker12 = document.getElementById("bgColorPicker12");
+  const bg12 = document.querySelector(".background_color12");
+
+  if (!picker12 || !bg12) return;
+
+  const updateColor12 = (color) => {
+    bg12.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker12.addEventListener("input", (e) => updateColor12(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker12.addEventListener("change", (e) => updateColor12(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker12.addEventListener("click", () => picker12.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor12, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
   // ✅ Change background on color selection
-  document.getElementById("bgColorPicker13").addEventListener("input", function (e) {
-    document.querySelector(".background_color13").style.backgroundColor = e.target.value;
-  });
+  // document.getElementById("bgColorPicker13").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color13").style.backgroundColor = e.target.value;
+  // });
+  // ✅ iOS-Compatible Background Color Changer
+
+
+</script>
+<script>
+function initBgColor13() {
+  const picker13 = document.getElementById("bgColorPicker13");
+  const bg13 = document.querySelector(".background_color13");
+
+  if (!picker13 || !bg13) return;
+
+  const updateColor13 = (color) => {
+    bg13.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker13.addEventListener("input", (e) => updateColor13(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker13.addEventListener("change", (e) => updateColor13(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker13.addEventListener("click", () => picker13.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor13, 200); // small delay helps on iOS
+});
 </script>
 
 <script>
-  // ✅ Change background on color selection
-  document.getElementById("bgColorPicker14").addEventListener("input", function (e) {
-    document.querySelector(".background_color14").style.backgroundColor = e.target.value;
-  });
+  // // ✅ Change background on color selection
+  // document.getElementById("bgColorPicker14").addEventListener("input", function (e) {
+  //   document.querySelector(".background_color14").style.backgroundColor = e.target.value;
+  // });
+
+
+  function initBgColor14() {
+  const picker14 = document.getElementById("bgColorPicker14");
+  const bg14 = document.querySelector(".background_color14");
+
+  if (!picker14 || !bg14) return;
+
+  const updateColor14 = (color) => {
+    bg14.style.backgroundColor = color;
+  };
+
+  // 🔹 Use 'input' event — supported when color changes live
+  picker14.addEventListener("input", (e) => updateColor14(e.target.value));
+
+  // 🔹 On iOS, 'change' fires only when picker closes
+  picker14.addEventListener("change", (e) => updateColor14(e.target.value));
+
+  // 🔹 Force focus to help some iOS Safari versions
+  picker14.addEventListener("click", () => picker14.focus());
+}
+
+// Ensure element exists before running
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(initBgColor14, 200); // small delay helps on iOS
+});
 </script>
 
 
